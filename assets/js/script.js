@@ -29,7 +29,7 @@ const timeElement = function(timeInput, color) {
     // time element
     let timeDivElement = document.createElement("div");
     timeDivElement.textContent = date;
-    timeDivElement.className = "time-div col d-flex justify-content-center align-items-center";
+    timeDivElement.className = "time-div d-flex justify-content-center align-items-center col";
     // data attribute or id
     
     // text area element
@@ -45,31 +45,25 @@ const timeElement = function(timeInput, color) {
         textAreaInputEl.className = "bg-green text-light form-control-lg";
     }
     
+    /*
+    // event listener as blur
     textAreaInputEl.addEventListener("blur", function() {
         console.log("blur");
         let eventText = textAreaInputEl.value;
-        console.log(eventText);
-        
-        tasks = [];
+        events = [];
         times = [];
-        
-        tasks.push(eventText);
+        events.push(eventText);
         times.push(timeInput);
         
-        console.log(tasks);
-        console.log(times);
-
+        
         for (let i = 0; i < timeInput.length; i++) {
             schedule[timeInput] = eventText;
         }
         
         saveSchedule();
-
-
-    })
-
-
-    textAreaDivEl.className = "d-flex col-8 align-items-center";
+    })*/
+    
+    textAreaDivEl.className = "d-flex col-6 col-sm-8 col-lg-10 align-items-center";
     textAreaDivEl.append(textAreaInputEl);
     
     // icon element
@@ -79,8 +73,19 @@ const timeElement = function(timeInput, color) {
     iconEl.className = "bi bi-save icon-el";
     iconDivEl.append(iconEl);
     
-    
+    iconDivEl.addEventListener("click", function () {
+        console.log("click");
+        let eventText = textAreaInputEl.value;
+        events = [];
+        times = [];
+        events.push(eventText);
+        times.push(timeInput);
 
+        for (let i = 0; i < timeInput.length; i++) {
+            schedule[timeInput] = eventText;
+        }
+        saveSchedule();
+    })
     
     timeRowEl.append(timeDivElement);
     timeRowEl.append(textAreaDivEl);
@@ -91,16 +96,20 @@ const timeElement = function(timeInput, color) {
 const loadSchedule = function() {
     schedule = JSON.parse(localStorage.getItem("schedule"));
     
-    let times = Object.keys(schedule);
-    console.log(times);
-    
-    for (const time of times) { // takes time as each element of "times" - same as spelt out for loop (for each loop)
-        console.log(time) // all the keys
-        let keyText = document.querySelector("#time"+time); // a single key, want value inside time variable, but want # in front of string
-        console.log(keyText);
-        let keyValue = schedule[time];
-        console.log(keyValue);
-        keyText.value = keyValue;
+    if (schedule != null) {
+        let times = Object.keys(schedule);
+        console.log(times);
+
+        for (const time of times) { // takes time as each element of "times" - same as spelt out for loop (for each loop)
+            console.log(time) // all the keys
+            let keyText = document.querySelector("#time" + time); // a single key, want value inside time variable, but want # in front of string
+            console.log(keyText);
+            let keyValue = schedule[time];
+            console.log(keyValue);
+            keyText.value = keyValue;
+        }
+    } else {
+        schedule = {};
     }
     
 }
