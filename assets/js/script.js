@@ -2,7 +2,7 @@
 js script file for day-scheduler
  */
 
-let sectionAnchor = document.querySelector("#sectionAnchor");
+let sectionAnchor = $("#sectionAnchor");
 
 
 
@@ -30,10 +30,12 @@ const timeElement = function(timeInput, color) {
     let timeDivElement = document.createElement("div");
     timeDivElement.textContent = date;
     timeDivElement.className = "time-div col d-flex justify-content-center align-items-center";
+    // data attribute or id
     
     // text area element
     let textAreaDivEl = document.createElement("div");
     let textAreaInputEl = document.createElement("input");
+    textAreaInputEl.setAttribute("id", "time" + date);
     textAreaInputEl.type = "textarea";
     if (color === "red") {
         textAreaInputEl.className = "bg-red text-light form-control-lg";
@@ -42,16 +44,6 @@ const timeElement = function(timeInput, color) {
     } else {
         textAreaInputEl.className = "bg-green text-light form-control-lg";
     }
-    
-    
-    //todo create on click listener and save to storage
-    /*$(".form-control-lg").on("blur", "textarea",function() {
-        console.log("hi");
-
-    })
-    $(textAreaInputEl).on("mouseover", "textarea", function() {
-        console.log("hi");
-    })*/
     
     textAreaInputEl.addEventListener("blur", function() {
         console.log("blur");
@@ -99,9 +91,17 @@ const timeElement = function(timeInput, color) {
 const loadSchedule = function() {
     schedule = JSON.parse(localStorage.getItem("schedule"));
     
-    // todo loop over schedule to put events in proper places
+    let times = Object.keys(schedule);
+    console.log(times);
     
-    
+    for (const time of times) { // takes time as each element of "times" - same as spelt out for loop (for each loop)
+        console.log(time) // all the keys
+        let keyText = document.querySelector("#time"+time); // a single key, want value inside time variable, but want # in front of string
+        console.log(keyText);
+        let keyValue = schedule[time];
+        console.log(keyValue);
+        keyText.value = keyValue;
+    }
     
 }
 
@@ -112,8 +112,6 @@ const saveSchedule = function() {
 
 const dayScheduler = function() {
     setHeaderDate();
-    
-    loadSchedule();
     
     let currentTime = moment();
     let nineAM = moment('9:00am', 'h:mma');
@@ -221,6 +219,8 @@ const dayScheduler = function() {
         let color = "grey";
         timeElement("4pm", color);
     }
+
+    loadSchedule();
     
     
     
