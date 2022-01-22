@@ -6,9 +6,6 @@ let sectionAnchor = document.querySelector("#sectionAnchor");
 
 
 
-
-
-
 const setHeaderDate = function() {
 // set header date
     let currentDayEl = document.querySelector("#currentDay");
@@ -21,7 +18,6 @@ const timeLogic = function (i) {
     let currentTime = moment();
     let date = currentTime.add(i, "hours").format("ha");
     return date;
-    // todo change this to 9-5
 }
 
 const timeElement = function(timeInput, color) {
@@ -39,7 +35,6 @@ const timeElement = function(timeInput, color) {
     let textAreaDivEl = document.createElement("div");
     let textAreaInputEl = document.createElement("input");
     textAreaInputEl.type = "textarea";
-    
     if (color === "red") {
         textAreaInputEl.className = "bg-red text-light form-control-lg";
     } else if (color === "grey") {
@@ -49,6 +44,39 @@ const timeElement = function(timeInput, color) {
     }
     
     
+    //todo create on click listener and save to storage
+    /*$(".form-control-lg").on("blur", "textarea",function() {
+        console.log("hi");
+
+    })
+    $(textAreaInputEl).on("mouseover", "textarea", function() {
+        console.log("hi");
+    })*/
+    
+    textAreaInputEl.addEventListener("blur", function() {
+        console.log("blur");
+        let eventText = textAreaInputEl.value;
+        console.log(eventText);
+        
+        tasks = [];
+        times = [];
+        
+        tasks.push(eventText);
+        times.push(timeInput);
+        
+        console.log(tasks);
+        console.log(times);
+
+        for (let i = 0; i < timeInput.length; i++) {
+            schedule[timeInput] = eventText;
+        }
+        
+        saveSchedule();
+
+
+    })
+
+
     textAreaDivEl.className = "d-flex col-8 align-items-center";
     textAreaDivEl.append(textAreaInputEl);
     
@@ -57,9 +85,9 @@ const timeElement = function(timeInput, color) {
     iconDivEl.className = "col d-flex justify-content-center align-items-center icon-div-el";
     let iconEl = document.createElement("i");
     iconEl.className = "bi bi-save icon-el";
-    
     iconDivEl.append(iconEl);
-
+    
+    
 
     
     timeRowEl.append(timeDivElement);
@@ -68,22 +96,26 @@ const timeElement = function(timeInput, color) {
     sectionAnchor.append(timeRowEl);
 }
 
+const loadSchedule = function() {
+    schedule = JSON.parse(localStorage.getItem("schedule"));
+    
+    // todo loop over schedule to put events in proper places
+    
+    
+    
+}
+
+const saveSchedule = function() {
+    console.log(schedule);
+    localStorage.setItem("schedule", JSON.stringify(schedule));
+}
 
 const dayScheduler = function() {
     setHeaderDate();
     
-
-    //todo if time is before current time, color is grey
-    // if time is current time, set to red
-    // if time is after current time, set to green
-
+    loadSchedule();
+    
     let currentTime = moment();
-    //let date = currentTime.add(i, "hours").format("ha");
-    // return date;
-    
-
-    
-    let color = "green";
     let nineAM = moment('9:00am', 'h:mma');
     let tenAM = moment('10:00am', 'h:mma');
     let elevenAM = moment('11:00am', 'h:mma');
@@ -93,8 +125,6 @@ const dayScheduler = function() {
     let threePM = moment('3:00pm', 'h:mma');
     let fourPM = moment('4:00pm', 'h:mma');
     let fivePM = moment('5:00pm', 'h:mma');
-
-
 
     // 9am
     if (currentTime.isBetween(nineAM, tenAM)) {
