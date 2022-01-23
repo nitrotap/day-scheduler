@@ -24,12 +24,14 @@ const timeElement = function(timeInput, color) {
     let date = timeInput;
     
     let timeRowEl = document.createElement("div");
-    timeRowEl.className = "container row border border-dark border-5" // time element row styles
-    
+    // timeRowEl.className = "container row border border-dark border-5" // time element row styles
+    timeRowEl.className = "container row " // time element row styles
+
+
     // time element
     let timeDivElement = document.createElement("div");
     timeDivElement.textContent = date;
-    timeDivElement.className = "time-div d-flex justify-content-center align-items-center col";
+    timeDivElement.className = "time-div d-flex justify-content-center align-items-center col border-bottom border-right border-dark border-5";
     // data attribute or id
     
     // text area element
@@ -63,12 +65,12 @@ const timeElement = function(timeInput, color) {
         saveSchedule();
     })*/
     
-    textAreaDivEl.className = "d-flex col-6 col-sm-8 col-lg-10 align-items-center";
+    textAreaDivEl.className = "d-flex col-6 col-sm-8 col-lg-10 align-items-center text-area-div";
     textAreaDivEl.append(textAreaInputEl);
     
     // icon element
     let iconDivEl = document.createElement("div");
-    iconDivEl.className = "col d-flex justify-content-center align-items-center icon-div-el";
+    iconDivEl.className = "col d-flex justify-content-center align-items-center icon-div-el border-left border-bottom border-dark border-5";
     let iconEl = document.createElement("i");
     iconEl.className = "bi bi-save icon-el";
     iconDivEl.append(iconEl);
