@@ -72,7 +72,6 @@ const timeElement = function(timeInput, color) {
     iconDivEl.append(iconEl);
     
     iconDivEl.addEventListener("click", function () {
-        console.log("click");
         let eventText = textAreaInputEl.value;
         events = [];
         times = [];
@@ -96,14 +95,10 @@ const loadSchedule = function() {
     
     if (schedule != null) {
         let times = Object.keys(schedule);
-        console.log(times);
 
         for (const time of times) { // takes time as each element of "times" - same as spelt out for loop (for each loop)
-            console.log(time) // all the keys
             let keyText = document.querySelector("#time" + time); // a single key, want value inside time variable, but want # in front of string
-            console.log(keyText);
             let keyValue = schedule[time];
-            console.log(keyValue);
             keyText.value = keyValue;
         }
     } else {
@@ -113,7 +108,6 @@ const loadSchedule = function() {
 }
 
 const saveSchedule = function() {
-    console.log(schedule);
     localStorage.setItem("schedule", JSON.stringify(schedule));
 }
 
