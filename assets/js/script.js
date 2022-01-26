@@ -79,7 +79,7 @@ const timeElement = function(timeInput, color) {
         times.push(timeInput);
 
         for (let i = 0; i < timeInput.length; i++) {
-            schedule[timeInput] = eventText; // todo change
+            schedule[timeInput] = eventText;
         }
         saveSchedule();
     })
@@ -125,100 +125,26 @@ const dayScheduler = function() {
     let fourPM = moment('4:00pm', 'h:mma');
     let fivePM = moment('5:00pm', 'h:mma');
 
-    // 9am
-    if (currentTime.isBetween(nineAM, tenAM)) {
-        let color = "red";
-        timeElement("9am", color);
-    } else if (currentTime.isBefore(nineAM)) {
-        let color = "green";
-        timeElement("9am", color);
-    } else {
-        let color = "grey";
-        timeElement("9am", color);
-    }
-    
-    // 10am
-    if (currentTime.isBetween(tenAM, elevenAM)) {
-        let color = "red";
-        timeElement("10am", color);
-    } else if (currentTime.isBefore(tenAM)) {
-        let color = "green";
-        timeElement("10am", color);
-    } else {
-        let color = "grey";
-        timeElement("10am", color);
-    }
+    // push timeslots into array and loop through the array, and add if condition into array
+    // let timeTextArray = ["9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm"];
 
-    // 11am
-    if (currentTime.isBetween(elevenAM, twelvePM)) {
-        let color = "red";
-        timeElement("11am", color);
-    } else if (currentTime.isBefore(elevenAM)) {
-        let color = "green";
-        timeElement("11am", color);
-    } else {
-        let color = "grey";
-        timeElement("11am", color);
-    }
-    
-    //12pm
-    if (currentTime.isBetween(twelvePM, onePM)) {
-        let color = "red";
-        timeElement("12pm", color);
-    } else if (currentTime.isBefore(twelvePM)) {
-        let color = "green";
-        timeElement("12pm", color);
-    } else {
-        let color = "grey";
-        timeElement("12pm", color);
-    }
-    
-    //1pm
-    if (currentTime.isBetween(onePM, twoPM)) {
-        let color = "red";
-        timeElement("1pm", color);
-    } else if (currentTime.isBefore(onePM)) {
-        let color = "green";
-        timeElement("1pm", color);
-    } else {
-        let color = "grey";
-        timeElement("1pm", color);
-    }
 
-    //2pm
-    if (currentTime.isBetween(twoPM, threePM)) {
-        let color = "red";
-        timeElement("2pm", color);
-    } else if (currentTime.isBefore(twoPM)) {
-        let color = "green";
-        timeElement("2pm", color);
-    } else {
-        let color = "grey";
-        timeElement("2pm", color);
-    }
-    
-    //3pm
-    if (currentTime.isBetween(threePM, fourPM)) {
-        let color = "red";
-        timeElement("3pm", color);
-    } else if (currentTime.isBefore(threePM)) {
-        let color = "green";
-        timeElement("3pm", color);
-    } else {
-        let color = "grey";
-        timeElement("3pm", color);
-    }
-    
-    //4pm
-    if (currentTime.isBetween(fourPM, fivePM)) {
-        let color = "red";
-        timeElement("4pm", color);
-    } else if (currentTime.isBefore(fourPM)) {
-        let color = "green";
-        timeElement("4pm", color);
-    } else {
-        let color = "grey";
-        timeElement("4pm", color);
+    let timeArray = [{timeSlot: nineAM, timeText: "9am"}, {timeSlot: tenAM, timeText: "10am"}, {timeSlot: elevenAM, timeText: "11am"},
+        {timeSlot: twelvePM, timeText: "12pm"}, {timeSlot: onePM, timeText: "1pm"}, {timeSlot: twoPM, timeText: "2pm"},  {timeSlot: threePM, timeText: "3pm"},
+        {timeSlot: fourPM, timeText: "4pm"}, {timeSlot: fivePM, timeText: "5pm"}];
+
+    for (let i = 0; i < timeArray.length - 1; i++) {
+        if (currentTime.isBetween(timeArray[i].timeSlot, timeArray[i + 1].timeSlot)) {
+            let color = "red";
+            timeElement(timeArray[i].timeText, color);
+        } else if (currentTime.isBefore(timeArray[i])) {
+            let color = "green";
+            timeElement(timeArray[i].timeText, color);
+        } else {
+            let color = "grey";
+            timeElement(timeArray[i].timeText, color);
+        }
+
     }
 
     loadSchedule();
