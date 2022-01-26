@@ -12,8 +12,6 @@ const setHeaderDate = function() {
     currentDayEl.textContent = currentTime.format("dddd, MMMM DD");
 }
 
-
-
 const timeElement = function(timeInput, color) {
     let date = timeInput;
     
@@ -104,7 +102,6 @@ const loadSchedule = function() {
     } else {
         schedule = {};
     }
-    
 }
 
 const saveSchedule = function() {
@@ -127,7 +124,6 @@ const dayScheduler = function() {
 
     // push timeslots into array and loop through the array, and add if condition into array
     // let timeTextArray = ["9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm"];
-
 
     let timeArray = [{timeSlot: nineAM, timeText: "9am"}, {timeSlot: tenAM, timeText: "10am"}, {timeSlot: elevenAM, timeText: "11am"},
         {timeSlot: twelvePM, timeText: "12pm"}, {timeSlot: onePM, timeText: "1pm"}, {timeSlot: twoPM, timeText: "2pm"},  {timeSlot: threePM, timeText: "3pm"},
