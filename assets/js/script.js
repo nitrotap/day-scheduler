@@ -5,14 +5,20 @@ js script file for day-scheduler
 let sectionAnchor = $("#sectionAnchor");
 
 
-// set header date
+
 const setHeaderDate = function() {
+// set header date
     let currentDayEl = document.querySelector("#currentDay");
     let currentTime = moment();
     currentDayEl.textContent = currentTime.format("dddd, MMMM DD");
 }
 
-
+// gets either current time (0), future time (pos number), or past time (neg number)
+const timeLogic = function (i) {
+    let currentTime = moment();
+    let date = currentTime.add(i, "hours").format("ha");
+    return date;
+}
 
 const timeElement = function(timeInput, color) {
     let date = timeInput;
@@ -21,17 +27,17 @@ const timeElement = function(timeInput, color) {
     // timeRowEl.className = "container row border border-dark border-5" // time element row styles
     timeRowEl.className = "container row " // time element row styles
 
+
     // time element
     let timeDivElement = document.createElement("div");
     timeDivElement.textContent = date;
-    timeDivElement.className = "time-div d-flex justify-content-end align-items-center col border-bottom border-right border-dark border-5";
+    timeDivElement.className = "time-div d-flex justify-content-center align-items-center col border-bottom border-right border-dark border-5";
     // data attribute or id
     
     // text area element
     let textAreaDivEl = document.createElement("div");
-    let textAreaInputEl = document.createElement("textarea");
+    let textAreaInputEl = document.createElement("input");
     textAreaInputEl.setAttribute("id", "time" + date);
-    textAreaInputEl.setAttribute("rows", "4");
     textAreaInputEl.type = "textarea";
     if (color === "red") {
         textAreaInputEl.className = "bg-red text-light form-control-lg";
@@ -40,8 +46,6 @@ const timeElement = function(timeInput, color) {
     } else {
         textAreaInputEl.className = "bg-green text-light form-control-lg";
     }
-    
-    // .attr() in jQuery to adding attribute to element
     
     /*
     // event listener as blur
@@ -148,6 +152,16 @@ const dayScheduler = function() {
     }
 
     loadSchedule();
+    
+    
+    
+    
 }
+
+
+
+
+
+
 
 dayScheduler();
