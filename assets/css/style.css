@@ -127,6 +127,36 @@ textarea{
   border-bottom: 1px lightgrey solid;
 }
 
+<<<<<<< HEAD:assets/css/style.css
+=======
+.row {
+  height: 101px;
+}
+
+footer {
+  width: 100%;
+  padding: 5px;
+  margin-top: 3vw;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border-top: 3px solid;
+  border-radius: 0;
+}
+
+footer h4 {
+  color: var(--primary-color);
+  font-size: 30px;
+  margin: 0;
+}
+
+footer div {
+  line-height: 1.5;
+  text-align: right;
+  font-size: 24px;
+  color: var(--primary-color);
+}
+>>>>>>> develop:assets/css/styles.css
 
 @media screen and (max-width: 333px) {
   .time-div {
