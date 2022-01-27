@@ -5,19 +5,11 @@ js script file for day-scheduler
 let sectionAnchor = $("#sectionAnchor");
 
 
-
-const setHeaderDate = function() {
 // set header date
+const setHeaderDate = function() {
     let currentDayEl = document.querySelector("#currentDay");
     let currentTime = moment();
     currentDayEl.textContent = currentTime.format("dddd, MMMM DD");
-}
-
-// gets either current time (0), future time (pos number), or past time (neg number)
-const timeLogic = function (i) {
-    let currentTime = moment();
-    let date = currentTime.add(i, "hours").format("ha");
-    return date;
 }
 
 const timeElement = function(timeInput, color) {
@@ -27,17 +19,17 @@ const timeElement = function(timeInput, color) {
     // timeRowEl.className = "container row border border-dark border-5" // time element row styles
     timeRowEl.className = "container row " // time element row styles
 
-
     // time element
     let timeDivElement = document.createElement("div");
     timeDivElement.textContent = date;
-    timeDivElement.className = "time-div d-flex justify-content-center align-items-center col border-bottom border-right border-dark border-5";
+    timeDivElement.className = "time-div d-flex justify-content-end align-items-center col border-bottom border-right border-dark border-5";
     // data attribute or id
     
     // text area element
     let textAreaDivEl = document.createElement("div");
-    let textAreaInputEl = document.createElement("input");
+    let textAreaInputEl = document.createElement("textarea");
     textAreaInputEl.setAttribute("id", "time" + date);
+    textAreaInputEl.setAttribute("rows", "4");
     textAreaInputEl.type = "textarea";
     if (color === "red") {
         textAreaInputEl.className = "bg-red text-light form-control-lg";
@@ -46,6 +38,8 @@ const timeElement = function(timeInput, color) {
     } else {
         textAreaInputEl.className = "bg-green text-light form-control-lg";
     }
+    
+    // .attr() in jQuery to adding attribute to element
     
     /*
     // event listener as blur
@@ -76,7 +70,6 @@ const timeElement = function(timeInput, color) {
     iconDivEl.append(iconEl);
     
     iconDivEl.addEventListener("click", function () {
-        console.log("click");
         let eventText = textAreaInputEl.value;
         events = [];
         times = [];
@@ -84,7 +77,7 @@ const timeElement = function(timeInput, color) {
         times.push(timeInput);
 
         for (let i = 0; i < timeInput.length; i++) {
-            schedule[timeInput] = eventText; // todo change
+            schedule[timeInput] = eventText;
         }
         saveSchedule();
     })
@@ -100,24 +93,18 @@ const loadSchedule = function() {
     
     if (schedule != null) {
         let times = Object.keys(schedule);
-        console.log(times);
 
         for (const time of times) { // takes time as each element of "times" - same as spelt out for loop (for each loop)
-            console.log(time) // all the keys
             let keyText = document.querySelector("#time" + time); // a single key, want value inside time variable, but want # in front of string
-            console.log(keyText);
             let keyValue = schedule[time];
-            console.log(keyValue);
             keyText.value = keyValue;
         }
     } else {
         schedule = {};
     }
-    
 }
 
 const saveSchedule = function() {
-    console.log(schedule);
     localStorage.setItem("schedule", JSON.stringify(schedule));
 }
 
@@ -135,113 +122,28 @@ const dayScheduler = function() {
     let fourPM = moment('4:00pm', 'h:mma');
     let fivePM = moment('5:00pm', 'h:mma');
 
-    // 9am
-    if (currentTime.isBetween(nineAM, tenAM)) {
-        let color = "red";
-        timeElement("9am", color);
-    } else if (currentTime.isBefore(nineAM)) {
-        let color = "green";
-        timeElement("9am", color);
-    } else {
-        let color = "grey";
-        timeElement("9am", color);
-    }
-    
-    // 10am
-    if (currentTime.isBetween(tenAM, elevenAM)) {
-        let color = "red";
-        timeElement("10am", color);
-    } else if (currentTime.isBefore(tenAM)) {
-        let color = "green";
-        timeElement("10am", color);
-    } else {
-        let color = "grey";
-        timeElement("10am", color);
-    }
+    // push timeslots into array and loop through the array, and add if condition into array
+    // let timeTextArray = ["9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm"];
 
-    // 11am
-    if (currentTime.isBetween(elevenAM, twelvePM)) {
-        let color = "red";
-        timeElement("11am", color);
-    } else if (currentTime.isBefore(elevenAM)) {
-        let color = "green";
-        timeElement("11am", color);
-    } else {
-        let color = "grey";
-        timeElement("11am", color);
-    }
-    
-    //12pm
-    if (currentTime.isBetween(twelvePM, onePM)) {
-        let color = "red";
-        timeElement("12pm", color);
-    } else if (currentTime.isBefore(twelvePM)) {
-        let color = "green";
-        timeElement("12pm", color);
-    } else {
-        let color = "grey";
-        timeElement("12pm", color);
-    }
-    
-    //1pm
-    if (currentTime.isBetween(onePM, twoPM)) {
-        let color = "red";
-        timeElement("1pm", color);
-    } else if (currentTime.isBefore(onePM)) {
-        let color = "green";
-        timeElement("1pm", color);
-    } else {
-        let color = "grey";
-        timeElement("1pm", color);
-    }
+    let timeArray = [{timeSlot: nineAM, timeText: "9am"}, {timeSlot: tenAM, timeText: "10am"}, {timeSlot: elevenAM, timeText: "11am"},
+        {timeSlot: twelvePM, timeText: "12pm"}, {timeSlot: onePM, timeText: "1pm"}, {timeSlot: twoPM, timeText: "2pm"},  {timeSlot: threePM, timeText: "3pm"},
+        {timeSlot: fourPM, timeText: "4pm"}, {timeSlot: fivePM, timeText: "5pm"}];
 
-    //2pm
-    if (currentTime.isBetween(twoPM, threePM)) {
-        let color = "red";
-        timeElement("2pm", color);
-    } else if (currentTime.isBefore(twoPM)) {
-        let color = "green";
-        timeElement("2pm", color);
-    } else {
-        let color = "grey";
-        timeElement("2pm", color);
-    }
-    
-    //3pm
-    if (currentTime.isBetween(threePM, fourPM)) {
-        let color = "red";
-        timeElement("3pm", color);
-    } else if (currentTime.isBefore(threePM)) {
-        let color = "green";
-        timeElement("3pm", color);
-    } else {
-        let color = "grey";
-        timeElement("3pm", color);
-    }
-    
-    //4pm
-    if (currentTime.isBetween(fourPM, fivePM)) {
-        let color = "red";
-        timeElement("4pm", color);
-    } else if (currentTime.isBefore(fourPM)) {
-        let color = "green";
-        timeElement("4pm", color);
-    } else {
-        let color = "grey";
-        timeElement("4pm", color);
+    for (let i = 0; i < timeArray.length - 1; i++) {
+        if (currentTime.isBetween(timeArray[i].timeSlot, timeArray[i + 1].timeSlot)) {
+            let color = "red";
+            timeElement(timeArray[i].timeText, color);
+        } else if (currentTime.isBefore(timeArray[i])) {
+            let color = "green";
+            timeElement(timeArray[i].timeText, color);
+        } else {
+            let color = "grey";
+            timeElement(timeArray[i].timeText, color);
+        }
+
     }
 
     loadSchedule();
-    
-    
-    
-    
 }
-
-
-
-
-
-
 
 dayScheduler();
