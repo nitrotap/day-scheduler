@@ -73,6 +73,7 @@ textarea{
 .bg-red {
   background-color: darkred;
   width: 100%;
+  height: 4rem;
   font-size: calc(16px + 0.55vw);
 }
 
@@ -87,9 +88,13 @@ textarea{
   font-size: calc(16px + 0.55vw);
 <<<<<<< HEAD:assets/css/styles.css
   height: 100px;
+<<<<<<< HEAD:assets/css/styles.css
   border-radius: 0;
 =======
 >>>>>>> parent of 8a880e4 (working JSON with keys OR not):assets/css/style.css
+=======
+  border-radius: 0px;
+>>>>>>> parent of 6daef48 (final touches):assets/css/style.css
 }
 
 .bg-grey:hover {
@@ -99,6 +104,7 @@ textarea{
 .bg-green {
   background-color: #1d8625;
   width: 100%;
+  height: 4rem;
   font-size: calc(16px + 0.55vw);
 }
 
