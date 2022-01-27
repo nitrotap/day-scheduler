@@ -73,8 +73,9 @@ textarea{
 .bg-red {
   background-color: darkred;
   width: 100%;
-  height: 4rem;
   font-size: calc(16px + 0.55vw);
+  height: 100px;
+
 }
 
 .bg-red:hover {
@@ -84,17 +85,9 @@ textarea{
 .bg-grey {
   background-color: #4a4c4f;
   width: 100%;
-  height: 4rem;
   font-size: calc(16px + 0.55vw);
-<<<<<<< HEAD:assets/css/styles.css
   height: 100px;
-<<<<<<< HEAD:assets/css/styles.css
   border-radius: 0;
-=======
->>>>>>> parent of 8a880e4 (working JSON with keys OR not):assets/css/style.css
-=======
-  border-radius: 0px;
->>>>>>> parent of 6daef48 (final touches):assets/css/style.css
 }
 
 .bg-grey:hover {
@@ -104,8 +97,9 @@ textarea{
 .bg-green {
   background-color: #1d8625;
   width: 100%;
-  height: 4rem;
   font-size: calc(16px + 0.55vw);
+  height: 100px;
+
 }
 
 .bg-green:hover {
@@ -127,8 +121,6 @@ textarea{
   border-bottom: 1px lightgrey solid;
 }
 
-<<<<<<< HEAD:assets/css/style.css
-=======
 .row {
   height: 101px;
 }
@@ -156,7 +148,6 @@ footer div {
   font-size: 24px;
   color: var(--primary-color);
 }
->>>>>>> develop:assets/css/styles.css
 
 @media screen and (max-width: 333px) {
   .time-div {
